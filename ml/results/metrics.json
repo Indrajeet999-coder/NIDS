@@ -1,0 +1,119 @@
+{
+  "champion_model": "XGBoost",
+  "models": {
+    "Logistic Regression": {
+      "train_time_s": 4.68,
+      "latency_ms_1k": 1.23,
+      "accuracy": 0.8948,
+      "precision": 0.6271,
+      "recall": 0.944,
+      "f1_score": 0.7536,
+      "roc_auc": 0.9616
+    },
+    "Decision Tree": {
+      "train_time_s": 13.95,
+      "latency_ms_1k": 0.73,
+      "accuracy": 0.9936,
+      "precision": 0.9697,
+      "recall": 0.9934,
+      "f1_score": 0.9814,
+      "roc_auc": 0.9991
+    },
+    "Random Forest": {
+      "train_time_s": 28.26,
+      "latency_ms_1k": 44.18,
+      "accuracy": 0.9938,
+      "precision": 0.9703,
+      "recall": 0.9939,
+      "f1_score": 0.982,
+      "roc_auc": 0.9998
+    },
+    "XGBoost": {
+      "train_time_s": 5.67,
+      "latency_ms_1k": 6.91,
+      "accuracy": 0.9938,
+      "precision": 0.9709,
+      "recall": 0.9936,
+      "f1_score": 0.9821,
+      "roc_auc": 0.9998
+    }
+  },
+  "best_model_confusion_matrix": {
+    "labels": [
+      "Normal (0)",
+      "Attack (1)"
+    ],
+    "matrix": [
+      [
+        98942,
+        608
+      ],
+      [
+        131,
+        20319
+      ]
+    ]
+  },
+  "top_15_feature_importances": [
+    {
+      "feature": "Bwd Packet Length Std",
+      "importance": 0.381652
+    },
+    {
+      "feature": "Average Packet Size",
+      "importance": 0.331955
+    },
+    {
+      "feature": "Bwd Header Length",
+      "importance": 0.096879
+    },
+    {
+      "feature": "Max Packet Length",
+      "importance": 0.086055
+    },
+    {
+      "feature": "Destination Port",
+      "importance": 0.018848
+    },
+    {
+      "feature": "PSH Flag Count",
+      "importance": 0.014424
+    },
+    {
+      "feature": "min_seg_size_forward",
+      "importance": 0.013462
+    },
+    {
+      "feature": "Fwd Packet Length Max",
+      "importance": 0.009742
+    },
+    {
+      "feature": "Avg Fwd Segment Size",
+      "importance": 0.006761
+    },
+    {
+      "feature": "Subflow Fwd Packets",
+      "importance": 0.006694
+    },
+    {
+      "feature": "Bwd Packet Length Mean",
+      "importance": 0.006361
+    },
+    {
+      "feature": "Fwd Header Length.1",
+      "importance": 0.00628
+    },
+    {
+      "feature": "Packet Length Variance",
+      "importance": 0.004054
+    },
+    {
+      "feature": "ACK Flag Count",
+      "importance": 0.003394
+    },
+    {
+      "feature": "Bwd Packet Length Max",
+      "importance": 0.002826
+    }
+  ]
+}
