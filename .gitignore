@@ -1,0 +1,23 @@
+# Dataset
+dataset/
+
+# Virtual Environments
+venv/
+.venv/
+
+# Python Cache & Testing Files
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Databases
+*.db
+
+# Node Dependencies
+node_modules/
+
+# Environment Configuration
+.env
+
+# Model Checkpoints / Artifacts
+ml/models/*.joblib
