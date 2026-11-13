@@ -441,7 +441,7 @@ def plot_model_comparison(results: dict):
     # Styling
     ax.set_xticks(x)
     ax.set_xticklabels(model_names, fontsize=11, color="white")
-    ax.set_ylim(0.80, 1.02)
+    ax.set_ylim(0.50, 1.04)
     ax.set_ylabel("Score", fontsize=12, color="white")
     ax.set_title(
         "Model Performance Benchmark — CICIDS2017 (20% Test Set)",
@@ -459,7 +459,7 @@ def plot_model_comparison(results: dict):
 
     plt.tight_layout()
     out_path = RESULTS_DIR / "model_comparison.png"
-    plt.savefig(out_path, dpi=150, bbox_inches="tight", facecolor=fig.get_facecolor())
+    plt.savefig(out_path, dpi=300, bbox_inches="tight", facecolor=fig.get_facecolor())
     plt.close()
     print(f"  ✔  Saved bar chart     → {out_path.relative_to(PROJECT_ROOT)}")
 
@@ -497,8 +497,16 @@ def plot_confusion_matrix(results: dict, best_name: str):
         linewidths=0.5,
         linecolor="#ffffff20",
         cbar_kws={"label": "% of True Class"},
-        annot_kws={"size": 13, "weight": "bold", "color": "white"},
+        annot_kws={"size": 13, "weight": "bold"},
     )
+
+    # Dynamic annotation text color: >50% white, <=50% dark navy (#0f172a)
+    for i in range(2):
+        for j in range(2):
+            idx = i * 2 + j
+            text_color = "white" if cm_norm[i, j] > 50 else "#0f172a"
+            if idx < len(ax.texts):
+                ax.texts[idx].set_color(text_color)
 
     # Styling
     ax.set_title(
@@ -516,7 +524,7 @@ def plot_confusion_matrix(results: dict, best_name: str):
 
     plt.tight_layout()
     out_path = RESULTS_DIR / "confusion_matrix.png"
-    plt.savefig(out_path, dpi=150, bbox_inches="tight", facecolor=fig.get_facecolor())
+    plt.savefig(out_path, dpi=300, bbox_inches="tight", facecolor=fig.get_facecolor())
     plt.close()
     print(f"  ✔  Saved confusion mat → {out_path.relative_to(PROJECT_ROOT)}")
 
