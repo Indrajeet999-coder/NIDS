@@ -29,4 +29,4 @@
 ## 4. Development Rules
 1. **Raw Data Protection**: Never modify or overwrite the raw CSV files in `dataset/raw/MachineLearningCVE/`.
 2. **Code Simplicity & Readability**: Keep all code clean, beginner-friendly, and well-documented with clear inline comments.
-
+3. **Security & Portability Rule**: NEVER hardcode API keys, passwords, tokens, or OS-specific absolute paths (such as `C:\Users\...`) in any `.py` or `.jsx` file. Always use relative paths (via Python's `pathlib.Path`) and environment variables with sensible fallback defaults so the project runs identically and securely across both Windows and macOS.

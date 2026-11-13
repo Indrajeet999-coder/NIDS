@@ -16,8 +16,10 @@ __pycache__/
 # Node Dependencies
 node_modules/
 
-# Environment Configuration
+# Environment Configuration & Secrets
 .env
+.env.*
+!.env.example
 
 # Model Checkpoints / Artifacts
 ml/models/*.joblib
