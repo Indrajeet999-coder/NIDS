@@ -42,6 +42,7 @@ class SingleFlowRequest(BaseModel):
 class PredictionItem(BaseModel):
     """
     Standardized inference verdict for an individual network flow.
+    Includes enriched telemetry fields for dashboard and SOC visualization.
     """
     flow_index: int = Field(
         default=0,
@@ -72,6 +73,56 @@ class PredictionItem(BaseModel):
         description="Flow duration in microseconds if present in flow features"
     )
 
+    # ── Enriched telemetry fields (new — all optional) ────────────────────────
+    packet_size_bytes: Optional[float] = Field(
+        default=None,
+        description="Average packet size in bytes derived from flow features"
+    )
+    protocol: Optional[str] = Field(
+        default=None,
+        description="Inferred transport protocol: TCP, UDP, or ICMP"
+    )
+    duration_sec: Optional[float] = Field(
+        default=None,
+        description="Flow duration converted to seconds"
+    )
+    duration_ms: Optional[float] = Field(
+        default=None,
+        description="Flow duration converted to milliseconds"
+    )
+    connections: Optional[int] = Field(
+        default=None,
+        description="Total packet count (Fwd + Bwd) representing connection activity"
+    )
+    source_ip: Optional[str] = Field(
+        default=None,
+        description="Source IP address (from data or deterministically generated)"
+    )
+    destination_ip: Optional[str] = Field(
+        default=None,
+        description="Destination IP address (from data or deterministically generated)"
+    )
+    src_bytes: Optional[int] = Field(
+        default=None,
+        description="Total bytes sent in the forward (source) direction"
+    )
+    dst_bytes: Optional[int] = Field(
+        default=None,
+        description="Total bytes sent in the backward (destination) direction"
+    )
+    flow_bytes_per_sec: Optional[float] = Field(
+        default=None,
+        description="Flow throughput in bytes per second"
+    )
+    attack_type: Optional[str] = Field(
+        default=None,
+        description="Categorized attack class (e.g. DDoS, Brute Force) or 'Normal Traffic'"
+    )
+    time: Optional[str] = Field(
+        default=None,
+        description="UTC wall-clock time when this flow was evaluated (HH:MM:SS)"
+    )
+
 
 # ── Batch Prediction Response Schema ─────────────────────────────────────────
 
@@ -97,6 +148,7 @@ class HealthResponse(BaseModel):
     model_name: str = Field(..., description="Name of the active champion ML classifier")
     expected_feature_count: int = Field(..., description="Number of expected flow input features")
     version: Optional[str] = Field(default="1.0.0", description="Artifact bundle version")
+    active_dataset: Optional[str] = Field(default=None, description="Active dataset source name")
 
 
 class FeaturesResponse(BaseModel):

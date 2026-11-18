@@ -1,0 +1,257 @@
+{
+  "metadata": {
+    "alpha": 0.05,
+    "train_samples": 480000,
+    "test_samples": 120000,
+    "total_samples": 600000,
+    "generated_at": "2026-11-18T18:09:43+0530"
+  },
+  "chi_square_protocol": {
+    "test_name": "Pearson's Chi-Square Test of Independence",
+    "variable_1": "Transport Protocol (TCP/UDP/ICMP mapped from Destination Port)",
+    "variable_2": "Label_Binary (0: Normal, 1: Intrusion)",
+    "chi2_statistic": 54024.288,
+    "p_value": 0.0,
+    "degrees_of_freedom": 2,
+    "alpha": 0.05,
+    "reject_null_hypothesis": true,
+    "contingency_table": {
+      "ICMP": {
+        "Normal_0": 286,
+        "Attack_1": 0,
+        "Total": 286
+      },
+      "TCP": {
+        "Normal_0": 227722,
+        "Attack_1": 81714,
+        "Total": 309436
+      },
+      "UDP": {
+        "Normal_0": 170190,
+        "Attack_1": 88,
+        "Total": 170278
+      }
+    },
+    "interpretation": "Statistically significant association between Transport Protocol and Traffic Class (Chi2 = 54024.29, p = 0.0000e+00, df = 2). Attack traffic is disproportionately concentrated in TCP services compared to UDP and ICMP."
+  },
+  "continuous_hypothesis_tests": {
+    "Average Packet Size": {
+      "source": "train.parquet (480,000 flows)",
+      "normal_mean": 131.6885,
+      "normal_std": 202.8469,
+      "intrusion_mean": 611.3482,
+      "intrusion_std": 559.3851,
+      "welch_t_test": {
+        "t_statistic": -242.0005,
+        "p_value": 0.0,
+        "reject_null": true
+      },
+      "levene_test": {
+        "statistic": 100144.4478,
+        "p_value": 0.0,
+        "equal_variance_rejected": true
+      }
+    },
+    "Total Fwd Packets": {
+      "source": "train.parquet (480,000 flows)",
+      "normal_mean": 10.7972,
+      "normal_std": 792.2845,
+      "intrusion_mean": 4.8827,
+      "intrusion_std": 17.628,
+      "welch_t_test": {
+        "t_statistic": 4.7051,
+        "p_value": 2.53884674128514e-06,
+        "reject_null": true
+      },
+      "levene_test": {
+        "statistic": 6.694,
+        "p_value": 0.009674690451549221,
+        "equal_variance_rejected": true
+      }
+    },
+    "Flow Duration": {
+      "source": "CICIDS2017 raw corpus (2,827,876 valid flows)",
+      "normal_mean": 11229599.5448,
+      "normal_std": 30133300.9864,
+      "intrusion_mean": 29374224.0337,
+      "intrusion_std": 42299908.3272,
+      "welch_t_test": {
+        "t_statistic": -301.7952,
+        "p_value": 0.0,
+        "reject_null": true
+      },
+      "levene_test": {
+        "statistic": 12133.593,
+        "p_value": 0.0,
+        "equal_variance_rejected": true
+      }
+    },
+    "Flow Bytes/s": {
+      "source": "CICIDS2017 raw corpus (2,827,876 valid flows)",
+      "normal_mean": 1779841.5572,
+      "normal_std": 28143722.9448,
+      "intrusion_mean": 315883.4282,
+      "intrusion_std": 13594279.4483,
+      "welch_t_test": {
+        "t_statistic": 56.1082,
+        "p_value": 0.0,
+        "reject_null": true
+      },
+      "levene_test": {
+        "statistic": 267.3747,
+        "p_value": 4.636172388604755e-60,
+        "equal_variance_rejected": true
+      }
+    }
+  },
+  "cross_validation_5fold_50k": {
+    "sample_size": 50000,
+    "n_splits": 5,
+    "models": {
+      "Logistic Regression": {
+        "f1_scores": [
+          0.7388,
+          0.7508,
+          0.7524,
+          0.7423,
+          0.727
+        ],
+        "f1_mean": 0.7423,
+        "f1_std": 0.0092,
+        "recall_scores": [
+          0.9472,
+          0.9501,
+          0.9489,
+          0.9407,
+          0.9425
+        ],
+        "recall_mean": 0.9459,
+        "recall_std": 0.0037
+      },
+      "Decision Tree": {
+        "f1_scores": [
+          0.9794,
+          0.9837,
+          0.9791,
+          0.9781,
+          0.9778
+        ],
+        "f1_mean": 0.9796,
+        "f1_std": 0.0021,
+        "recall_scores": [
+          0.9894,
+          0.9918,
+          0.9912,
+          0.983,
+          0.993
+        ],
+        "recall_mean": 0.9897,
+        "recall_std": 0.0035
+      },
+      "Random Forest": {
+        "f1_scores": [
+          0.9794,
+          0.9851,
+          0.9803,
+          0.9805,
+          0.9783
+        ],
+        "f1_mean": 0.9807,
+        "f1_std": 0.0023,
+        "recall_scores": [
+          0.9906,
+          0.9924,
+          0.993,
+          0.9888,
+          0.993
+        ],
+        "recall_mean": 0.9916,
+        "recall_std": 0.0016
+      },
+      "XGBoost": {
+        "f1_scores": [
+          0.9795,
+          0.9823,
+          0.9795,
+          0.9814,
+          0.9789
+        ],
+        "f1_mean": 0.9803,
+        "f1_std": 0.0013,
+        "recall_scores": [
+          0.993,
+          0.9947,
+          0.9959,
+          0.99,
+          0.9947
+        ],
+        "recall_mean": 0.9937,
+        "recall_std": 0.002
+      }
+    },
+    "one_way_anova": {
+      "f1_score": {
+        "F_statistic": 2367.0141,
+        "p_value": 2.1760891922698442e-21,
+        "reject_null": true,
+        "interpretation": "Statistically significant difference in F1-score across models (F = 2367.01, p = 2.1761e-21)."
+      },
+      "recall": {
+        "F_statistic": 257.4172,
+        "p_value": 9.533115283371107e-14,
+        "reject_null": true,
+        "interpretation": "Statistically significant difference in Recall across models (F = 257.42, p = 9.5331e-14)."
+      }
+    }
+  },
+  "test_set_confusion_matrices": {
+    "Logistic Regression": {
+      "TN": 88072,
+      "FP": 11478,
+      "FN": 1145,
+      "TP": 19305,
+      "Total_Test_Samples": 120000,
+      "Accuracy": 0.8948,
+      "Precision": 0.6271,
+      "Recall": 0.944,
+      "F1_Score": 0.7536,
+      "ROC_AUC": 0.9616
+    },
+    "Decision Tree": {
+      "TN": 98915,
+      "FP": 635,
+      "FN": 134,
+      "TP": 20316,
+      "Total_Test_Samples": 120000,
+      "Accuracy": 0.9936,
+      "Precision": 0.9697,
+      "Recall": 0.9934,
+      "F1_Score": 0.9814,
+      "ROC_AUC": 0.9991
+    },
+    "Random Forest": {
+      "TN": 98927,
+      "FP": 623,
+      "FN": 124,
+      "TP": 20326,
+      "Total_Test_Samples": 120000,
+      "Accuracy": 0.9938,
+      "Precision": 0.9703,
+      "Recall": 0.9939,
+      "F1_Score": 0.982,
+      "ROC_AUC": 0.9998
+    },
+    "XGBoost": {
+      "TN": 98942,
+      "FP": 608,
+      "FN": 131,
+      "TP": 20319,
+      "Total_Test_Samples": 120000,
+      "Accuracy": 0.9938,
+      "Precision": 0.9709,
+      "Recall": 0.9936,
+      "F1_Score": 0.9821,
+      "ROC_AUC": 0.9998
+    }
+  }
+}
