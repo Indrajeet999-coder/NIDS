@@ -26,3 +26,11 @@ ml/models/*.joblib
 
 *.db-wal
 *.db-shm
+
+# Internal planning docs & reports
+AGENTS.md
+ARCHITECTURE.md
+DESIGN.md
+PLAN.md
+*.docx
+*.pdf
